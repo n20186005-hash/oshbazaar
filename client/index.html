@@ -1,17 +1,65 @@
 <!doctype html>
-<html lang="ky">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
     <meta name="theme-color" content="#a63a2b" />
-    <meta name="description" content="Independent bilingual visitor field guide for Osh Bazaar in Bishkek, Kyrgyzstan." />
+    <title>Osh Bazaar Bishkek — Visitor Guide</title>
+    <meta name="description" content="An independent visitor guide to Osh Bazaar in Bishkek, Kyrgyzstan — opening hours, how to get there, on-site services, weather, and seasonal tips." />
+    <link rel="canonical" href="https://oshbazaar.org/" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/manus-storage/osh-bazaar-mark_91e1898f.png" />
-    <title>Ош базары — Бишкек</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Osh Bazaar Bishkek — Visitor Guide" />
+    <meta property="og:title" content="Osh Bazaar Bishkek — Visitor Guide" />
+    <meta property="og:description" content="Independent visitor guide to Osh Bazaar in Bishkek, Kyrgyzstan — hours, transport, services, weather, and seasonal tips." />
+    <meta property="og:url" content="https://oshbazaar.org/" />
+    <meta property="og:image" content="https://oshbazaar.org/assets/osh-bazaar-market.jpg" />
+    <meta property="og:image:alt" content="Osh Bazaar market in Bishkek, Kyrgyzstan" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="ky_KG" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Osh Bazaar Bishkek — Visitor Guide" />
+    <meta name="twitter:description" content="Independent visitor guide to Osh Bazaar in Bishkek, Kyrgyzstan — hours, transport, services, weather, and seasonal tips." />
+    <meta name="twitter:image" content="https://oshbazaar.org/assets/osh-bazaar-market.jpg" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": ["TouristAttraction", "LocalBusiness", "Market"],
+        "@id": "https://oshbazaar.org/#attraction",
+        "name": "Osh Bazaar",
+        "alternateName": ["Ош базары", "Osh Bazaary"],
+        "description": "A large everyday market in western Bishkek, Kyrgyzstan, known for food aisles, Kyrgyz crafts, and the Kyyal section.",
+        "url": "https://oshbazaar.org",
+        "image": ["https://oshbazaar.org/assets/osh-bazaar-market.jpg"],
+        "isAccessibleForFree": true,
+        "telephone": "+996700484414",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Osh Bazaar, western Bishkek",
+          "addressLocality": "Bishkek",
+          "addressRegion": "Bishkek",
+          "postalCode": "720000",
+          "addressCountry": "KG"
+        },
+        "geo": { "@type": "GeoCoordinates", "latitude": 42.874967, "longitude": 74.570242 },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "09:00",
+            "closes": "17:00"
+          }
+        ],
+        "hasMap": "https://maps.app.goo.gl/Zwu3fXYciWxa9A7ZA",
+        "sameAs": ["https://maps.app.goo.gl/Zwu3fXYciWxa9A7ZA", "https://www.kyrgyzstan.travel/"]
+      }
+    </script>
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-HXM22WWPKP"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -19,5 +67,9 @@
       gtag('js', new Date());
       gtag('config', 'G-HXM22WWPKP');
     </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

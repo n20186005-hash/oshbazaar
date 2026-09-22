@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Osh Bazaar mark">
+  <rect width="512" height="512" rx="96" fill="#a63a2b"/>
+  <circle cx="256" cy="210" r="120" fill="none" stroke="#f6f1e7" stroke-width="14"/>
+  <path d="M176 330 h160 l-22 92 a18 18 0 0 1 -18 14 H216 a18 18 0 0 1 -18 -14 Z" fill="#f6f1e7"/>
+  <path d="M196 250 q60 56 120 0" fill="none" stroke="#e4b66f" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="256" cy="210" r="34" fill="#e4b66f"/>
+</svg>

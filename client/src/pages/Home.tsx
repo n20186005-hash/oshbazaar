@@ -9,7 +9,9 @@ import {
   ArrowUpRight,
   Banknote,
   BedDouble,
+  BookOpen,
   BusFront,
+  CalendarDays,
   Camera,
   CarFront,
   ChevronDown,
@@ -27,10 +29,13 @@ import {
   ParkingCircle,
   Phone,
   Plane,
+  Route,
   ShoppingBag,
   Sun,
+  Users,
   UtensilsCrossed,
 } from "lucide-react";
+import WeatherSection from "@/components/WeatherSection";
 
 type Locale = "ky" | "en";
 
@@ -44,6 +49,10 @@ const ASSETS = {
 const MAP_URL = "https://maps.app.goo.gl/Zwu3fXYciWxa9A7ZA";
 const MAP_EMBED_URL =
   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5208.19584640904!2d74.56766707758626!3d42.87496697114973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389ec86ab8c07f75%3A0xbc52cd6625964fd1!2z5aWl5LuA5be05omO!5e1!3m2!1sky!2skg";
+const GOVT_TOURISM_URL = "https://www.kyrgyzstan.travel/";
+const LAT = 42.874967;
+const LON = 74.570242;
+const CANONICAL = "https://oshbazaar.org/";
 
 const copy = {
   ky: {
@@ -55,15 +64,19 @@ const copy = {
     marketPhotoAlt: "Ош базарындагы татымал сатылган катар",
     marketDisplayAlt: "Ош базарындагы соода катарлары",
     mapTitle: "Ош базарынын картасы",
-    nav: ["Базар", "Тарых", "Баруу", "Билүү", "Суроолор"],
-    navIds: ["market", "history", "visit", "know", "faq"],
+    nav: ["Базар", "Тарых", "Баруу", "Аба ырайы", "Жетүү", "Керек", "Суроолор"],
+    navIds: ["market", "history", "visit", "weather", "know", "amenities", "faq"],
     location: "Бишкек · Кыргызстан",
     eyebrow: "КӨЗ КАРАНДЫСЫЗ КЕЛҮҮЧҮ ЖОЛ КӨРСӨТКҮЧ",
+    seoTitle: "Ош базары Бишкек — Туристтик гид",
+    seoDescription:
+      "Ош базары (Бишкек, Кыргызстан) боюнча көз карандысыз гид: убакыт, жетүү жолу, кызматтар, аба ырайы жана мезгилдик кеңештер.",
     title: "Ош базары",
     deck: "Бишкектин батыш тарабындагы күнүмдүк сооданын, жыттардын жана жолугушуулардын чоң мейкиндиги.",
     mapCta: "Картадан ачуу",
     scrollCta: "Барууну пландаңыз",
     mapNote: "Координат: 42.874967, 74.570242",
+    ratingLine: "Эл аралык баа: 3.6 · 39,218 отзыв",
     facts: [
       ["БАЙЛАНЫШ", "+996 700 484 414"],
       ["БАГЫТ", "Батыш Бишкек"],
@@ -94,7 +107,7 @@ const copy = {
       ["СУНУШТАЛГАН УБАКЫТ", "1,5–2 саат", "Азык-түлүк, улуттук буюмдар жана бир тамактануу тыныгуусу үчүн ыңгайлуу аралык."],
       ["ЭСКЕРТҮҮ", "Акча жана документ", "Көп эл топтолгон катарларда баалуулуктарды жабык кармап, негизги документти өзүңүз менен алып жүрбөңүз."],
     ],
-    routesLabel: "04 / ЖЕТҮҮ ЖОЛУ",
+    routesLabel: "05 / ЖЕТҮҮ ЖОЛУ",
     routesTitle: "Базарга кайсы жол менен барса болот?",
     routesIntro: "Ош базары шаардын батыш тарабында, мурдагы Батыш автобекетке жакын жайгашкан. Аэропорттон базардын эшигине чейин туруктуу түз каттамды көрсөтпөйбүз: шаарга келип, акыркы бөлүк үчүн жандуу карта менен которулуу жолун тактоо эң коопсуз ыкма.",
     routes: [
@@ -103,7 +116,7 @@ const copy = {
       ["КООМДУК УНАА", "Борбордон автобус жана маршрут", "Шаар борборундагы токтоочу жайлардан базар тарапка каттаган унааларды ошол күнкү маршрут пландоочудан текшериңиз. Каттам номери, убактылуу айланма жол жана токтоо жайы өзгөрүшү мүмкүн."],
       ["ШААР ИЧИНДЕГИ ТАКСИ", "Кыска акыркы бөлүк", "Картада «Ош базары» деп киргизип, түшүү чекитин алдын ала тактаңыз. Эл көп көчөлөрдө күтүп туруу же унаа токтотуу чектелиши мүмкүн; жол менен төлөмдү отурардан мурда сүйлөшүп алыңыз."],
     ],
-    amenitiesLabel: "05 / КЕРЕКТҮҮ НЕРСЕЛЕР",
+    amenitiesLabel: "06 / КЕРЕКТҮҮ НЕРСЕЛЕР",
     amenitiesTitle: "Күндөлүк муктаждыкка ылайык",
     amenitiesIntro: "Бул маалымат кызматтын түрүн гана көрсөтөт, конкреттүү соода жайын сунуштабайт. Жеткиликтүүлүк жана иштөө шарттары жерде өзгөрүшү мүмкүн.",
     amenities: [
@@ -115,8 +128,35 @@ const copy = {
       ["Күйүүчү май / кубаттоо", "Унаа менен келсеңиз, сапар алдында шаардык картадан жакын май куюу же кубаттоо пункттарын караңыз. Алардын түрү жана бош орду өзгөрүп турат."],
       ["АКЧА ЖАНА ТӨЛӨМ", "Майда сатып алуулар үчүн накталай сом ыңгайлуу болушу мүмкүн. Карта, акча алмаштыруу жана банкомат мүмкүнчүлүгү ар бир жерде ар башка; баалуулуктарды ачык кармабаңыз."],
       ["КИРҮҮ ЫҢГАЙЛУУЛУГУ", "Катарлар тар жана кыймылдуу болушу мүмкүн. Балдар арабасы, чоң жүк же кыймылы чектелген адам менен келсеңиз, эл азыраак убакытты тандап, коштоочу менен жүрүңүз."],
+      ["СУПЕРМАРКЕТ / ЧАРБА", "Базардан тышкары шаар борборундагы чоң дүкөндөр күнүмдүк азык-түлүк жана белгилүү бренддер үчүн ыңгайлуу. Баа жана ассортимент базардан айырмаланышы мүмкүн."],
+      ["ДАРЫКАНА", "Жакынкы коомдук дарыкана негизги дары-дармектер жана гигиена каражаттары үчүн. Көзөтчүдөн же картадан жакын жайды сураңыз."],
     ],
-    guideLabel: "06 / БАЗАРДАГЫ ЭТИКА",
+    seasonLabel: "07 / МЕЗГИЛДИК СТРАТЕГИЯ",
+    seasonTitle: "Бишкектеги төрт мезгил",
+    seasonIntro: "Бишкек — континенталдык климаттагы шаар: күндүн жылуулугу менен түнкү суук ортосундагы айырма чоң. Төмөнкү таблица мезгилди тандоого жардам берет.",
+    seasonHeaders: ["Мезгил", "Аба ырайы", "Эмне жакшы", "Кеңеш"],
+    seasons: [
+      ["Жаз (март–май)", "Эригүү, батышкан жолдор, өзгөрмөлүү", "Кол өнөрчүлүк, жаңы жашылча", "Шамалга жана батышка даярданыңыз; суу өткөрбөгөн бут кийим."],
+      ["Жай (июнь–август)", "Жылуу 25–32°, ачык күн", "Эртең менен кыдыруу, суусундук", "Түштөн кийинки ысыктан сактануу; суу жана калпак алыңыз."],
+      ["Күз (сентябрь–ноябрь)", "Жумшак, ачык, мол түшүм", "Эң ыңгайлуу мезгил, мөмө-жемиш", "Түнкү салкынга жылуу кийим кошуңуз."],
+      ["Кыш (декабрь–февраль)", "Суук −5…−15°, кар, муз", "Ички кол өнөрчүлүк, кийиз буюмдары", "Музда жүрүүгө көңүл бургула; кирүү убактысы кыскараак болушу мүмкүн."],
+    ],
+    audienceLabel: "08 / АДАМДАР БОЮНЧА",
+    audienceTitle: "Үч багыт — кимиңизге жараша",
+    audienceIntro: "Базарды ар ким өз ыргагы менен кыдырат. Төмөнкү үч багыт сапарыңызды тез жосунга салууга жардам берет.",
+    audiences: [
+      ["Үй-бүлө (балдар менен)", "Кыска айлана, тамак-аш көрүү, ачык аянтча. Түшкү элден качыңыз; балдар арабасы үчүн кең катарларды тандаңыз."],
+      ["Фотограф / табият", "Эртең менен жумшак жарыкты тартыңыз; кийиз, сандык жана түстүү текстиль бурчтары — деталдар үчүн."],
+      ["Аз кыймыл / жеткиликтүүлүк", "Негизги тегиз катарлар, эс алуу жайлары; таксини кире беришке жакын токтотуу, кыска убакыт."],
+    ],
+    generalLabel: "09 / ЖАЛПЫ МАРШРУТ",
+    generalTitle: "Жарым күн жана толук күн",
+    generalIntro: "Убактыңызга жараша эки багытты сунуштайбыз. Экөө тең кирүүдөн башталат жана маалымат картасынан такталат.",
+    generalRoutes: [
+      ["Жарым күн (2,5 саат)", "Кирүү → азык-түлүк катарлары → Кыял кол өнөрчүлүгү → текстиль → чыгуу.", "Базардын негизин тез кармап алат."],
+      ["Толук күн (5 саат)", "Базар → жакынкы тамак-аш → Ала-Тоо аянты → Панфилов паркы → шаар музейи.", "Бишкектин борборун бирге кыдыруу."],
+    ],
+    guideLabel: "10 / БАЗАРДАГЫ ЭТИКА",
     guideTitle: "Байкоо менен, шашпай кыдыруу",
     guideIntro: "Кесипкөй коомдук жол көрсөткүч катары бул бөлүм сатуучуларга, башка конокторго жана өзүңүздүн коопсуздугуңузга урмат менен мамиле кылууга жардам берген жөнөкөй эрежелерди сунуштайт.",
     guideItems: [
@@ -125,7 +165,14 @@ const copy = {
       ["ТАМАК-АШ ЖАНА ЫҢГАЙЛУУЛУК", "Даяр тамакты тандаганда анын сакталуу жана даярдоо шартын байкаңыз. Суу, жеңил баштык жана аба ырайына ылайык кийим узагыраак басууга жардам берет."],
       ["АКЧА ЖАНА ТЕМП", "Майда акчаны өзүнчө, баалуу буюмду жабык кармаңыз. Бааны тактоо жана шашпай салыштыруу сатып алууну түшүнүктүүрөөк кылат."],
     ],
-    exploreLabel: "07 / БАЗАРДАН АРЫ",
+    scienceLabel: "11 / ТАЛАА ИЗИЛДӨӨ",
+    scienceTitle: "Базарды окуу жана жоопкерчилик",
+    scienceIntro: "Көз карандысыз иликтөөчү катары биз базарды коммерциялык эмес, маалыматтык булак катары гана баяндайбыз.",
+    scienceBody: [
+      ["Эмне үчүн бул иликтөө объектиси?", "Ош базары — шаардын күнүмдүк чарбасынын тирүү картасы. Ал ар кайсы аймактардын продукциясын, көчмөн маданияттын издерин (кийиз, сандык) жана шаардык соода тарыхын бир жерге алып келет. Этнография, шаар таануу жана экономика үчүн ачык булак катары кызыктуу."],
+      ["Келгендердин жоопкерчилиги", "Сатуучулардын эмгегин урматтаңыз: бааны келишүү, сүрөт үчүн уруксат сурау, таштандыны белгиленген жерге таштоо. Базар — адамдардын иш жайы; аны музей эмес, жашоочу мейкиндик катары сыйлаңыз."],
+    ],
+    exploreLabel: "12 / БАЗАРДАН АРЫ",
     exploreTitle: "Бишкектеги күндү улантуу",
     exploreIntro: "Базардан кийин шаардын борборуна өтүп, аянт, парк жана музей өңдүү коомдук мейкиндиктерди өз ыргагыңыз менен кыдырсаңыз болот.",
     explore: [
@@ -133,7 +180,7 @@ const copy = {
       ["Жашыл тыныгуу", "Панфилов паркы сыяктуу сейил бактар базардагы ызы-чуудан кийин кыска эс алууга шарт түзөт."],
       ["Маданий багыт", "Шаардык музейлер жана маданий жайлардын учурдагы иш убактысын расмий баракчаларынан текшерип барыңыз."],
     ],
-    faqLabel: "08 / СУРООЛОР",
+    faqLabel: "13 / СУРООЛОР",
     faqTitle: "Көп берилген суроолор",
     faqs: [
       ["Базарга билет керекпи?", "Жок. Негизги базар аймагына кирүү адатта акысыз. Сатып алуулар жана айрым кызматтар үчүн төлөм өзүнчө жүргүзүлөт."],
@@ -160,15 +207,19 @@ const copy = {
     marketPhotoAlt: "A spice stall inside Osh Bazaar",
     marketDisplayAlt: "Market displays at Osh Bazaar",
     mapTitle: "Osh Bazaar map",
-    nav: ["Market", "History", "Visit", "Know", "FAQ"],
-    navIds: ["market", "history", "visit", "know", "faq"],
+    nav: ["Market", "History", "Visit", "Weather", "Getting there", "On site", "FAQ"],
+    navIds: ["market", "history", "visit", "weather", "know", "amenities", "faq"],
     location: "Bishkek · Kyrgyzstan",
     eyebrow: "INDEPENDENT VISITOR FIELD GUIDE",
+    seoTitle: "Osh Bazaar Bishkek — Visitor Guide",
+    seoDescription:
+      "An independent visitor guide to Osh Bazaar in Bishkek, Kyrgyzstan — opening hours, how to get there, on-site services, weather, and seasonal tips.",
     title: "Osh Bazaar",
     deck: "A vast western-Bishkek meeting ground for everyday trade, scents, and city life.",
     mapCta: "Open the map",
     scrollCta: "Plan your visit",
     mapNote: "Coordinates: 42.874967, 74.570242",
+    ratingLine: "Public rating: 3.6 · 39,218 reviews",
     facts: [
       ["CONTACT", "+996 700 484 414"],
       ["DIRECTION", "West Bishkek"],
@@ -199,7 +250,7 @@ const copy = {
       ["ALLOW", "1.5–2 hours", "A useful window for food aisles, national goods, and a short food break."],
       ["KEEP IN MIND", "Cash & documents", "In crowded lanes, keep valuables closed and leave non-essential documents where you are staying."],
     ],
-    routesLabel: "04 / GETTING THERE",
+    routesLabel: "05 / GETTING THERE",
     routesTitle: "How to reach the bazaar",
     routesIntro: "Osh Bazaar sits in western Bishkek near the former Western Bus Station. We do not present a fixed airport-to-door public route: arrive in the city, then verify the final transfer in a live map on the day you travel.",
     routes: [
@@ -208,7 +259,7 @@ const copy = {
       ["PUBLIC TRANSPORT", "Bus and marshrutka from the centre", "Use a current route planner for services heading towards the market from central stops. Route numbers, temporary diversions, and stop positions can change."],
       ["CITY TAXI", "A short final approach", "Enter “Osh Bazaar” in your map app and confirm the drop-off point. Crowded streets can limit waiting or parking; agree the route and payment before boarding."],
     ],
-    amenitiesLabel: "05 / USEFUL ON SITE",
+    amenitiesLabel: "06 / USEFUL ON SITE",
     amenitiesTitle: "For everyday practicalities",
     amenitiesIntro: "These notes identify service types only; no individual businesses are endorsed. Availability and operating conditions can change on site.",
     amenities: [
@@ -220,8 +271,35 @@ const copy = {
       ["Fuel / charging", "If arriving by car, use a live city map to locate nearby fuel or charging points before your trip. Service type and availability vary."],
       ["CASH & PAYMENT", "Cash in Kyrgyz som can be practical for smaller purchases. Card, exchange, and cash-machine availability varies by location; do not display valuables openly."],
       ["ACCESS & COMPANIONS", "Aisles can be narrow and busy. If travelling with a pushchair, larger luggage, or someone with reduced mobility, choose a quieter time and consider going with a companion."],
+      ["Supermarket / grocery", "Larger stores in the city centre suit everyday groceries and known brands beyond the bazaar. Prices and range differ from the market."],
+      ["Pharmacy", "A nearby public pharmacy covers basic medicine and hygiene needs. Ask a guard or map for the closest one."],
     ],
-    guideLabel: "06 / MARKET ETIQUETTE",
+    seasonLabel: "07 / SEASONAL STRATEGY",
+    seasonTitle: "Four seasons in Bishkek",
+    seasonIntro: "Bishkek has a continental climate: the gap between warm days and cool nights is wide. The table below helps you pick a season.",
+    seasonHeaders: ["Season", "Conditions", "Best for", "Tips"],
+    seasons: [
+      ["Spring (Mar–May)", "Thaw, slushy lanes, changeable", "Crafts, early produce", "Prepare for wind and mud; wear waterproof shoes."],
+      ["Summer (Jun–Aug)", "Warm 25–32°, sunny", "Morning visits, hydration", "Avoid midday heat; carry water and a hat."],
+      ["Autumn (Sep–Nov)", "Mild, clear, abundant harvest", "Best overall window, fruit", "Add a warm layer for cool evenings."],
+      ["Winter (Dec–Feb)", "Cold −5…−15°, snow, ice", "Indoor crafts, felt goods", "Watch for ice; opening hours may be shorter."],
+    ],
+    audienceLabel: "08 / BY TRAVELLER",
+    audienceTitle: "Three routes — by who you are",
+    audienceIntro: "Everyone walks the bazaar at their own pace. The three routes below help shape your visit quickly.",
+    audiences: [
+      ["Families (with children)", "A short loop, food tasting, open spaces. Avoid the midday crowd; choose wider lanes for pushchairs."],
+      ["Photographers / nature", "Shoot in the soft morning light; felt chests and colourful textile corners reward detail work."],
+      ["Low mobility / accessible", "Main level lanes and rest spots; have a taxi drop you near the entrance for a shorter visit."],
+    ],
+    generalLabel: "09 / SUGGESTED ROUTES",
+    generalTitle: "Half-day and full-day",
+    generalIntro: "Two routes by available time. Both start at the entrance and are confirmed against a live map.",
+    generalRoutes: [
+      ["Half-day (2.5 hrs)", "Entrance → food aisles → Kyyal crafts → textile → exit.", "Grasps the market’s core quickly."],
+      ["Full-day (5 hrs)", "Bazaar → nearby meal → Ala-Too Square → Panfilov Park → city museum.", "Pairs the market with central Bishkek."],
+    ],
+    guideLabel: "10 / MARKET ETIQUETTE",
     guideTitle: "Observe closely; move slowly",
     guideIntro: "As a public-interest guide, this section offers simple practices that respect vendors, other visitors, and your own safety without promoting any individual business.",
     guideItems: [
@@ -230,7 +308,14 @@ const copy = {
       ["FOOD & COMFORT", "When choosing prepared food, observe storage and preparation conditions. Water, a light bag, and weather-appropriate clothing make a longer visit easier."],
       ["MONEY & PACE", "Keep small notes separate and valuables closed. Confirming a price and comparing without rushing makes purchases easier to understand."],
     ],
-    exploreLabel: "07 / BEYOND THE BAZAAR",
+    scienceLabel: "11 / FIELD NOTES",
+    scienceTitle: "Reading the bazaar & responsibility",
+    scienceIntro: "As an independent observer, we describe the bazaar only as a non-commercial, informational source.",
+    scienceBody: [
+      ["Why it is a field subject", "Osh Bazaar is a living map of the city’s everyday economy. It gathers produce from many regions, traces of nomadic culture (felt, chests), and the history of urban trade in one place — a useful open source for ethnography, urban studies, and economics."],
+      ["Visitor responsibility", "Respect the vendors’ work: agree prices, ask before photographing, and bin waste in marked spots. The bazaar is a workplace, not a museum — treat it as a living space."],
+    ],
+    exploreLabel: "12 / BEYOND THE BAZAAR",
     exploreTitle: "Continue your Bishkek day",
     exploreIntro: "After the market, move towards the centre for public squares, parks, and museums at your own pace.",
     explore: [
@@ -238,7 +323,7 @@ const copy = {
       ["A green pause", "Parks such as Panfilov Park provide a quieter break after the sound and pace of the market."],
       ["Culture", "Check current official pages for opening information at city museums and cultural spaces before setting out."],
     ],
-    faqLabel: "08 / FAQ",
+    faqLabel: "13 / FAQ",
     faqTitle: "Frequently asked questions",
     faqs: [
       ["Do I need a ticket?", "No. Entry to the main market area is generally free. Purchases and some services are paid for separately."],
@@ -258,29 +343,50 @@ const copy = {
   },
 } as const;
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    { "@type": "Question", name: "Do I need a ticket for Osh Bazaar?", acceptedAnswer: { "@type": "Answer", text: "Entry to the main market area is generally free; purchases and some services are separate." } },
-    { "@type": "Question", name: "What is the best time to visit Osh Bazaar?", acceptedAnswer: { "@type": "Answer", text: "Morning can be useful before the market becomes busier. Check current information before travel." } },
-    { "@type": "Question", name: "Where is Osh Bazaar?", acceptedAnswer: { "@type": "Answer", text: "Osh Bazaar is in western Bishkek, Kyrgyzstan, close to the former Western Bus Station." } },
-    { "@type": "Question", name: "How should I prepare for a visit?", acceptedAnswer: { "@type": "Answer", text: "Keep valuables secure, confirm current route and hours, and carry some Kyrgyz som for small purchases." } },
-  ],
-};
-
 const placeSchema = {
   "@context": "https://schema.org",
-  "@type": ["TouristAttraction", "LocalBusiness"],
+  "@type": ["TouristAttraction", "LocalBusiness", "Market"],
+  "@id": "https://oshbazaar.org/#attraction",
   name: "Osh Bazaar",
-  alternateName: "Ош базары",
-  description: "A large bazaar in western Bishkek, Kyrgyzstan.",
-  address: { "@type": "PostalAddress", addressLocality: "Bishkek", addressCountry: "KG" },
-  geo: { "@type": "GeoCoordinates", latitude: "42.874967", longitude: "74.570242" },
+  alternateName: ["Ош базары", "Osh Bazaary"],
+  description:
+    "A large everyday market in western Bishkek, Kyrgyzstan, known for food aisles, Kyrgyz crafts, and the Kyyal section.",
+  url: "https://oshbazaar.org",
+  image: ["https://oshbazaar.org/assets/osh-bazaar-market.jpg"],
+  isAccessibleForFree: true,
   telephone: "+996700484414",
-  openingHours: "Mo-Su 09:00-17:00",
-  aggregateRating: { "@type": "AggregateRating", ratingValue: "3.6", reviewCount: "39136" },
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Osh Bazaar, western Bishkek",
+    addressLocality: "Bishkek",
+    addressRegion: "Bishkek",
+    postalCode: "720000",
+    addressCountry: "KG",
+  },
+  geo: { "@type": "GeoCoordinates", latitude: 42.874967, longitude: 74.570242 },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: "09:00",
+      closes: "17:00",
+    },
+  ],
+  hasMap: MAP_URL,
+  sameAs: [MAP_URL, GOVT_TOURISM_URL],
 };
+
+function buildFaqSchema(locale: Locale) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: copy[locale].faqs.map(([name, text]) => ({
+      "@type": "Question",
+      name,
+      acceptedAnswer: { "@type": "Answer", text },
+    })),
+  };
+}
 
 function useLocale() {
   const [locale, setLocale] = useState<Locale>(() => {
@@ -292,6 +398,17 @@ function useLocale() {
     window.localStorage.setItem("osh-bazaar-locale", next);
   };
   return { locale, selectLocale };
+}
+
+function setMeta(attr: "name" | "property", key: string, content: string) {
+  if (typeof document === "undefined") return;
+  let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
+  if (!el) {
+    el = document.createElement("meta");
+    el.setAttribute(attr, key);
+    document.head.appendChild(el);
+  }
+  el.setAttribute("content", content);
 }
 
 function LanguageToggle({ locale, label, selectLocale }: { locale: Locale; label: string; selectLocale: (next: Locale) => void }) {
@@ -313,17 +430,30 @@ export default function Home() {
 
   useEffect(() => {
     document.documentElement.lang = locale;
-    document.title = `${t.title} — ${t.location}`;
-  }, [locale, t.location, t.title]);
+    document.title = t.seoTitle;
+    setMeta("name", "description", t.seoDescription);
+    setMeta("property", "og:title", t.seoTitle);
+    setMeta("property", "og:description", t.seoDescription);
+    setMeta("property", "og:locale", locale === "ky" ? "ky_KG" : "en_US");
+    let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.rel = "canonical";
+      document.head.appendChild(canonical);
+    }
+    canonical.href = CANONICAL;
+  }, [locale, t.seoDescription, t.seoTitle]);
 
-  const amenities = [UtensilsCrossed, Accessibility, ParkingCircle, BedDouble, ShoppingBag, Fuel, Banknote, HandHeart];
+  const amenities = [UtensilsCrossed, Accessibility, ParkingCircle, BedDouble, ShoppingBag, Fuel, Banknote, HandHeart, ShoppingBag, Info];
   const routeIcons = [Plane, CarFront, BusFront, CarFront];
   const guideIcons = [Navigation, Camera, UtensilsCrossed, Banknote];
+  const audienceIcons = [Users, Camera, Accessibility];
+  const generalIcons = [Route, Navigation];
 
   return (
     <main className="site-shell">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(placeSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(buildFaqSchema(locale)) }} />
 
       <header className="site-header">
         <a href="#top" className="brand" aria-label={t.title}>
@@ -388,6 +518,8 @@ export default function Home() {
         </div>
       </section>
 
+      <WeatherSection locale={locale} lat={LAT} lon={LON} />
+
       <section className="route-section" id="know">
         <div className="route-image" style={{ backgroundImage: `url(${ASSETS.textile})` }}><p>Бишкек<br /><span>BISHKEK</span></p></div>
         <div className="route-content">
@@ -403,13 +535,57 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="amenity-section">
+      <section className="amenity-section" id="amenities">
         <div className="section-number">{t.amenitiesLabel}</div>
         <div className="section-heading heading-split"><h2>{t.amenitiesTitle}</h2><p>{t.amenitiesIntro}</p></div>
         <div className="amenity-grid">
           {t.amenities.map(([title, description], index) => {
             const Icon = amenities[index];
             return <article key={title}><Icon size={22} /><h3>{title}</h3><p>{description}</p></article>;
+          })}
+        </div>
+      </section>
+
+      <section className="season-section" id="season">
+        <div className="section-number">{t.seasonLabel}</div>
+        <div className="section-heading heading-split"><h2>{t.seasonTitle}</h2><p>{t.seasonIntro}</p></div>
+        <div className="season-table">
+          <div className="season-row season-head">
+            {t.seasonHeaders.map((h) => <span key={h}>{h}</span>)}
+          </div>
+          {t.seasons.map((row) => (
+            <div className="season-row" key={row[0]}>
+              {row.map((cell) => <span key={cell}>{cell}</span>)}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="audience-section" id="audience">
+        <div className="section-number">{t.audienceLabel}</div>
+        <div className="section-heading heading-split"><h2>{t.audienceTitle}</h2><p>{t.audienceIntro}</p></div>
+        <div className="audience-grid">
+          {t.audiences.map(([title, description], index) => {
+            const Icon = audienceIcons[index];
+            return <article key={title}><Icon size={24} /><h3>{title}</h3><p>{description}</p></article>;
+          })}
+        </div>
+      </section>
+
+      <section className="general-section" id="general">
+        <div className="section-number">{t.generalLabel}</div>
+        <div className="section-heading heading-split"><h2>{t.generalTitle}</h2><p>{t.generalIntro}</p></div>
+        <div className="general-grid">
+          {t.generalRoutes.map(([title, duration, description], index) => {
+            const Icon = generalIcons[index];
+            return (
+              <article key={title}>
+                <Icon size={24} />
+                <h3>{title}</h3>
+                <span className="general-duration"><CalendarDays size={14} />{duration}</span>
+                <p>{description}</p>
+              </article>
+            );
           })}
         </div>
       </section>
@@ -424,8 +600,20 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="science-section" id="science">
+        <div className="science-heading"><div className="section-number">{t.scienceLabel}</div><div><BookOpen size={27} /><h2>{t.scienceTitle}</h2></div><p>{t.scienceIntro}</p></div>
+        <div className="science-grid">
+          {t.scienceBody.map(([title, body]) => <article key={title}><h3>{title}</h3><p>{body}</p></article>)}
+        </div>
+      </section>
+
       <section className="map-section">
-        <div className="map-note"><MapPin size={21} /><div><span>VHFC+X3</span><strong>{t.location}</strong></div><a href={MAP_URL} target="_blank" rel="noreferrer"><Navigation size={18} /><span>{t.mapCta}</span></a></div>
+        <div className="map-note">
+          <MapPin size={21} />
+          <div><span>VHFC+X3</span><strong>{t.location}</strong></div>
+          <a href={MAP_URL} target="_blank" rel="noreferrer"><Navigation size={18} /><span>{t.mapCta}</span></a>
+          <p className="map-rating"><Sun size={14} />{t.ratingLine}</p>
+        </div>
         <iframe title={t.mapTitle} src={MAP_EMBED_URL} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
       </section>
 

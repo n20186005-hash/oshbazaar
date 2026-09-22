@@ -1,0 +1,19 @@
+{
+  "name": "Osh Bazaar Bishkek — Visitor Guide",
+  "short_name": "Osh Bazaar",
+  "description": "Independent visitor guide to Osh Bazaar in Bishkek, Kyrgyzstan — hours, transport, services, weather, and seasonal tips.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f6f1e7",
+  "theme_color": "#a63a2b",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

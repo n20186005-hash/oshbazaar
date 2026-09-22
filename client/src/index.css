@@ -192,4 +192,83 @@
 @keyframes rise-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 820px) { .site-header { height: 75px; padding: 0 1.1rem; } .site-header nav { display: none; } .hero { min-height: auto; grid-template-columns: 1fr; gap: 2rem; padding: 3.5rem 1.25rem 2.5rem; } .hero::before { width: 125vw; height: 125vw; min-width: 0; min-height: 0; left: -20vw; top: -66vw; } .hero-index { display: none; } .hero h1 { font-size: clamp(4.8rem, 20vw, 7rem); } .hero-photo-wrap { min-height: 360px; padding-top: 1.1rem; } .hero-photo { width: 89%; height: 87%; } .hero-rail { grid-template-columns: 1fr; margin-top: 1.25rem; } .hero-rail > div { padding: .8rem 0; border-bottom: 1px solid rgba(33,28,25,.15); } .field-section, .history-section, .plan-section, .amenity-section, .guide-section, .explore-section { padding: 4rem 1.25rem; } .field-grid, .heading-split, .history-heading, .guide-heading, .explore-header, .faq-section { grid-template-columns: 1fr; } .field-image { grid-template-columns: 1fr; } .history-timeline, .fact-grid { grid-template-columns: 1fr 1fr; } .fact-card:nth-child(odd), .history-timeline article:nth-child(odd) { border-left: 1px solid #c8bbaa; } .fact-card { min-height: 210px; } .history-timeline article { min-height: 240px; } .history-timeline article div { margin-top: 2.3rem; } .route-section { grid-template-columns: 1fr; } .route-image { min-height: 310px; } .route-content { padding: 4rem 1.25rem; } .amenity-grid, .guide-grid { grid-template-columns: 1fr 1fr; } .map-section { grid-template-columns: 1fr; } .map-note { padding: 2rem 1.25rem; } .map-section iframe { min-height: 370px; } .faq-section { gap: 2.5rem; padding: 4rem 1.25rem; } .source-card { margin: 1.25rem; } .site-footer { grid-template-columns: 1fr; padding: 3rem 1.25rem; } .legal-paper { box-shadow: 9px 9px 0 #a63a2b; } }
 @media (max-width: 480px) { .brand img { width: 32px; height: 32px; } .brand { font-size: 1.08rem; } .hero h1 { font-size: 4.55rem; } .history-timeline, .fact-grid, .amenity-grid, .guide-grid { grid-template-columns: 1fr; } .fact-card, .history-timeline article { border-left: 1px solid #c8bbaa; } .hero-actions { display: grid; grid-template-columns: 1fr; } .button { width: 100%; } .explore-list article { grid-template-columns: 35px 1fr; } .explore-list article svg { display: none; } .legal-shell { padding: .7rem; } .legal-paper { padding: 2.2rem 1.35rem; } .legal-paper > .eyebrow { margin-top: 2.5rem; } }
+
+/* --- New sections: weather, seasonal, audience, general, science --- */
+.weather-section { padding: clamp(4rem, 9vw, 8.5rem) clamp(1.25rem, 8vw, 9rem); background: #e8ddca; color: #211c19; }
+.weather-body { display: grid; grid-template-columns: minmax(240px, .8fr) 1.2fr; gap: clamp(2rem, 5vw, 4rem); margin-top: clamp(2.5rem, 6vw, 5rem); align-items: start; }
+.weather-now { background: #211c19; color: #f6f1e7; padding: 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: .35rem; }
+.weather-now-icon { color: #e4b66f; }
+.weather-now-name { margin: .2rem 0; font: 500 1.05rem "DM Sans", Arial, sans-serif; color: #f4d8c9; }
+.weather-now-temp { margin: 0; font: 600 clamp(3.4rem, 6vw, 5rem)/.9 "Cormorant Garamond", Georgia, serif; }
+.weather-now-temp small { font-size: .4em; }
+.weather-now-meta { margin: .7rem 0 0; display: grid; gap: .5rem; }
+.weather-now-meta div { display: flex; align-items: center; gap: .5rem; font-size: .8rem; color: #e9dfd2; }
+.weather-now-meta dt { color: #bdb0a2; }
+.weather-now-meta dd { margin: 0; font-weight: 600; }
+.weather-umbrella { display: flex; align-items: center; gap: .45rem; margin: 1rem 0 0; padding: .6rem .8rem; font-size: .78rem; font-weight: 600; }
+.weather-umbrella.is-rain { background: rgba(228, 182, 111, .18); color: #f4d8c9; }
+.weather-umbrella.is-dry { background: rgba(246, 241, 231, .12); color: #cfe3d2; }
+.weather-updated { margin: .9rem 0 0; font-size: .62rem; letter-spacing: .1em; color: #9b8d7e; }
+.weather-forecast-title { margin: 0 0 1rem; font-size: .64rem; letter-spacing: .14em; font-weight: 800; color: #9c3a2a; text-transform: uppercase; }
+.weather-forecast-row { display: grid; grid-template-columns: repeat(7, 1fr); border-top: 1px solid #c5b59f; border-left: 1px solid #c5b59f; }
+.weather-forecast-row article { padding: 1rem .5rem; border-right: 1px solid #c5b59f; border-bottom: 1px solid #c5b59f; display: flex; flex-direction: column; align-items: center; gap: .5rem; text-align: center; }
+.weather-forecast-row article.is-today { background: rgba(228, 182, 111, .14); }
+.weather-day { font-size: .58rem; letter-spacing: .08em; font-weight: 800; color: #9b3c2d; text-transform: uppercase; }
+.weather-day-icon { color: #a63a2b; }
+.weather-day-temp { font: 600 1.05rem "Cormorant Garamond", Georgia, serif; }
+.weather-day-rain { display: flex; align-items: center; gap: .25rem; font-size: .62rem; color: #7a6c5f; }
+.weather-empty { margin-top: 2.5rem; padding: 2rem; background: rgba(33, 28, 25, .06); color: #63564c; display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; }
+.weather-empty button { border: 1px solid #a63a2b; background: transparent; color: #a63a2b; padding: .5rem 1rem; font-weight: 700; }
+
+.season-section { padding: clamp(4rem, 9vw, 8.5rem) clamp(1.25rem, 8vw, 9rem); background: #e9dcc7; color: #211c19; }
+.season-table { margin-top: clamp(2.5rem, 6vw, 5rem); border-top: 1px solid #bda990; border-left: 1px solid #bda990; }
+.season-row { display: grid; grid-template-columns: 1.1fr 1.4fr 1.2fr 1.6fr; border-right: 1px solid #bda990; border-bottom: 1px solid #bda990; }
+.season-row > span { padding: 1rem 1.1rem; font-size: .82rem; line-height: 1.55; color: #4f4339; border-left: 1px solid #bda990; }
+.season-row > span:first-child { border-left: 0; font-weight: 700; font-family: "Cormorant Garamond", Georgia, serif; font-size: 1.2rem; color: #211c19; }
+.season-head { background: #211c19; }
+.season-head > span { color: #f4d8c9; font-weight: 800; font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; border-left: 1px solid rgba(246, 241, 231, .2); }
+.season-head > span:first-child { border-left: 0; }
+
+.audience-section { padding: clamp(4rem, 9vw, 8.5rem) clamp(1.25rem, 8vw, 9rem); background: #f6f1e7; color: #211c19; }
+.audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: clamp(2.5rem, 6vw, 5rem); border-top: 1px solid #cfc0af; border-left: 1px solid #cfc0af; }
+.audience-grid article { padding: 2.2rem 1.6rem; border-right: 1px solid #cfc0af; border-bottom: 1px solid #cfc0af; transition: background-color 180ms cubic-bezier(.23, 1, .32, 1); }
+.audience-grid article:hover { background: #ece1cc; }
+.audience-grid svg { color: #a63a2b; }
+.audience-grid h3 { margin: 1.2rem 0 .6rem; font: 600 1.6rem/1.05 "Cormorant Garamond", Georgia, serif; }
+.audience-grid p { margin: 0; font-size: .8rem; line-height: 1.7; color: #64574c; }
+
+.general-section { padding: clamp(4rem, 9vw, 8.5rem) clamp(1.25rem, 8vw, 9rem); background: #e8ddca; color: #211c19; }
+.general-grid { display: grid; grid-template-columns: repeat(2, 1fr); margin-top: clamp(2.5rem, 6vw, 5rem); gap: 1px; background: #c5b59f; }
+.general-grid article { padding: 2.2rem 1.8rem; background: #e8ddca; display: flex; flex-direction: column; gap: .6rem; transition: background-color 180ms cubic-bezier(.23, 1, .32, 1); }
+.general-grid article:hover { background: #e0d2b8; }
+.general-grid svg { color: #a63a2b; }
+.general-grid h3 { margin: 0; font: 600 1.9rem/1 "Cormorant Garamond", Georgia, serif; }
+.general-duration { display: inline-flex; align-items: center; gap: .4rem; font-size: .68rem; font-weight: 800; letter-spacing: .08em; color: #9b3c2d; text-transform: uppercase; }
+.general-grid p { margin: 0; font-size: .82rem; line-height: 1.7; color: #63564c; }
+
+.science-section { padding: clamp(4rem, 9vw, 8.5rem) clamp(1.25rem, 8vw, 9rem); background: #211c19; color: #f6f1e7; }
+.science-heading { display: grid; grid-template-columns: .8fr 1.12fr .72fr; gap: clamp(1.5rem, 4vw, 4.5rem); align-items: end; }
+.science-heading .section-number { align-self: start; color: #e1a448; }
+.science-heading svg { color: #e1a448; }
+.science-heading h2 { margin: 0; max-width: 520px; font: 600 clamp(3.2rem, 5.6vw, 6rem)/.85 "Cormorant Garamond", Georgia, serif; letter-spacing: -.045em; }
+.science-heading > p { margin: 0; max-width: 390px; color: #cbbcae; font-size: .9rem; line-height: 1.75; }
+.science-grid { display: grid; grid-template-columns: repeat(2, 1fr); margin-top: clamp(3rem, 6vw, 5.5rem); gap: clamp(2rem, 5vw, 4rem); border-top: 1px solid rgba(246, 241, 231, .2); padding-top: clamp(2.5rem, 5vw, 4rem); }
+.science-grid h3 { margin: 0 0 .8rem; font: 600 1.7rem/1 "Cormorant Garamond", Georgia, serif; color: #e4b66f; }
+.science-grid p { margin: 0; color: #d8ccbe; font-size: .88rem; line-height: 1.8; }
+
+.map-rating { display: flex; align-items: center; gap: .45rem; margin: 1rem 0 0; font-size: .68rem; color: #cbbcae; }
+.map-rating svg { color: #e2a34a; }
+
+@media (max-width: 820px) {
+  .weather-section, .season-section, .audience-section, .general-section, .science-section { padding: 4rem 1.25rem; }
+  .weather-body { grid-template-columns: 1fr; }
+  .weather-forecast-row { grid-template-columns: repeat(7, minmax(58px, 1fr)); overflow-x: auto; }
+  .season-row { grid-template-columns: 1fr; }
+  .season-row > span { border-left: 0; border-top: 1px solid #bda990; }
+  .season-row > span:first-child { border-top: 0; }
+  .season-head { display: none; }
+  .audience-grid { grid-template-columns: 1fr; }
+  .general-grid { grid-template-columns: 1fr; }
+  .science-heading, .science-grid { grid-template-columns: 1fr; }
+}
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
