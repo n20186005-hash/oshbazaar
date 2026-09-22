@@ -220,6 +220,16 @@
 .weather-empty { margin-top: 2.5rem; padding: 2rem; background: rgba(33, 28, 25, .06); color: #63564c; display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; }
 .weather-empty button { border: 1px solid #a63a2b; background: transparent; color: #a63a2b; padding: .5rem 1rem; font-weight: 700; }
 
+/* Smart, tourist-facing advice */
+.weather-advice { margin-top: clamp(2rem, 5vw, 3.2rem); }
+.weather-risk { background: #9b3c2d; color: #f6f1e7; padding: 1rem 1.2rem; border-radius: 4px; margin-bottom: 1.4rem; }
+.weather-risk-title { display: block; font-size: .62rem; letter-spacing: .14em; font-weight: 800; text-transform: uppercase; margin-bottom: .5rem; }
+.weather-risk ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .35rem; font-size: .82rem; line-height: 1.4; }
+.weather-advice-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.weather-advice-block { background: rgba(33, 28, 25, .05); border: 1px solid #cdbca6; border-radius: 4px; padding: 1rem 1.1rem; }
+.weather-advice-block h3 { margin: 0 0 .7rem; font-size: .62rem; letter-spacing: .12em; font-weight: 800; text-transform: uppercase; color: #9b3c2d; }
+.weather-advice-block ul { margin: 0; padding-left: 1.05rem; display: grid; gap: .5rem; font-size: .82rem; line-height: 1.45; color: #4a3f37; }
+
 .season-section { padding: clamp(4rem, 9vw, 8.5rem) clamp(1.25rem, 8vw, 9rem); background: #e9dcc7; color: #211c19; }
 .season-table { margin-top: clamp(2.5rem, 6vw, 5rem); border-top: 1px solid #bda990; border-left: 1px solid #bda990; }
 .season-row { display: grid; grid-template-columns: 1.1fr 1.4fr 1.2fr 1.6fr; border-right: 1px solid #bda990; border-bottom: 1px solid #bda990; }
@@ -263,6 +273,7 @@
   .weather-section, .season-section, .audience-section, .general-section, .science-section { padding: 4rem 1.25rem; }
   .weather-body { grid-template-columns: 1fr; }
   .weather-forecast-row { grid-template-columns: repeat(7, minmax(58px, 1fr)); overflow-x: auto; }
+  .weather-advice-grid { grid-template-columns: 1fr; }
   .season-row { grid-template-columns: 1fr; }
   .season-row > span { border-left: 0; border-top: 1px solid #bda990; }
   .season-row > span:first-child { border-top: 0; }
