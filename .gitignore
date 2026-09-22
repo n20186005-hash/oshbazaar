@@ -2,6 +2,9 @@
 node_modules/
 .pnpm-store/
 
+# Lockfiles: this project is managed with pnpm; ignore stray npm lockfiles
+package-lock.json
+
 # Build output
 dist/
 .wrangler/

@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Osh Bazaar mark">
-  <rect width="64" height="64" rx="12" fill="#f6f1e7"/>
-  <path d="M14 49V31C14 18 22 10 32 10s18 8 18 21v18H39V31c0-7-3-11-7-11s-7 4-7 11v18Z" fill="#a63a2b"/>
-  <path d="M32 24c5 4 7 9 0 16-7-7-5-12 0-16Z" fill="#e1a448"/>
-  <circle cx="32" cy="32" r="2.5" fill="#211c19"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Osh Bazaar mark">
+  <rect width="512" height="512" rx="96" fill="#a63a2b"/>
+  <circle cx="256" cy="210" r="120" fill="none" stroke="#f6f1e7" stroke-width="14"/>
+  <path d="M176 330 h160 l-22 92 a18 18 0 0 1 -18 14 H216 a18 18 0 0 1 -18 -14 Z" fill="#f6f1e7"/>
+  <path d="M196 250 q60 56 120 0" fill="none" stroke="#e4b66f" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="256" cy="210" r="34" fill="#e4b66f"/>
 </svg>

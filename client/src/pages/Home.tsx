@@ -49,7 +49,6 @@ const ASSETS = {
 const MAP_URL = "https://maps.app.goo.gl/Zwu3fXYciWxa9A7ZA";
 const MAP_EMBED_URL =
   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5208.19584640904!2d74.56766707758626!3d42.87496697114973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389ec86ab8c07f75%3A0xbc52cd6625964fd1!2z5aWl5LuA5be05omO!5e1!3m2!1sky!2skg";
-const GOVT_TOURISM_URL = "https://www.kyrgyzstan.travel/";
 const LAT = 42.874967;
 const LON = 74.570242;
 const CANONICAL = "https://oshbazaar.org/";
@@ -343,38 +342,9 @@ const copy = {
   },
 } as const;
 
-const placeSchema = {
-  "@context": "https://schema.org",
-  "@type": ["TouristAttraction", "LocalBusiness", "Market"],
-  "@id": "https://oshbazaar.org/#attraction",
-  name: "Osh Bazaar",
-  alternateName: ["Ош базары", "Osh Bazaary"],
-  description:
-    "A large everyday market in western Bishkek, Kyrgyzstan, known for food aisles, Kyrgyz crafts, and the Kyyal section.",
-  url: "https://oshbazaar.org",
-  image: ["https://oshbazaar.org/assets/osh-bazaar-market.jpg"],
-  isAccessibleForFree: true,
-  telephone: "+996700484414",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Osh Bazaar, western Bishkek",
-    addressLocality: "Bishkek",
-    addressRegion: "Bishkek",
-    postalCode: "720000",
-    addressCountry: "KG",
-  },
-  geo: { "@type": "GeoCoordinates", latitude: 42.874967, longitude: 74.570242 },
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      opens: "09:00",
-      closes: "17:00",
-    },
-  ],
-  hasMap: MAP_URL,
-  sameAs: [MAP_URL, GOVT_TOURISM_URL],
-};
+
+
+
 
 function buildFaqSchema(locale: Locale) {
   return {
@@ -452,7 +422,6 @@ export default function Home() {
 
   return (
     <main className="site-shell">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(placeSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(buildFaqSchema(locale)) }} />
 
       <header className="site-header">
