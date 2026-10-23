@@ -11,7 +11,7 @@ const copy = {
       sections: [
         [
           "Кызматтар",
-          "Барак Google Analytics өлчөө скриптин жана Google Maps картасын колдонот. Google Analytics барак ачылганда жүктөлөт; cookie’ни браузердин жөндөөлөрүнөн башкара аласыз.",
+          "Барак Google Analytics өлчөө скриптин, Google Maps картасын жана Google Fonts шрифттерин колдонот. Google Analytics барак ачылганда жүктөлөт; cookie’ни браузердин жөндөөлөрүнөн башкара аласыз.",
         ],
         [
           "Аба ырайы жана сактагыч",
@@ -59,7 +59,7 @@ const copy = {
         ],
         [
           "Тил жана башка кызматтар",
-          "Тил URL менен аныкталат. Google Maps, Open-Meteo жана хостинг кызматтарынын өз саясаттары бар; браузердин сактагычын тазалоо алардын бардык маалымат иштетүүсүн токтотот деп кепилденбейт.",
+          "Тил URL менен аныкталат. Google Maps, Google Fonts, Open-Meteo жана хостинг кызматтарынын өз саясаттары бар; браузердин сактагычын тазалоо алардын бардык маалымат иштетүүсүн токтотот деп кепилденбейт.",
         ],
       ],
     },
@@ -73,7 +73,7 @@ const copy = {
       sections: [
         [
           "Services",
-          "The page uses a Google Analytics measurement script and embedded Google Maps. Google Analytics loads when pages open; use your browser settings to manage cookies.",
+          "The page uses a Google Analytics measurement script embedded Google Maps and Google Fonts. Google Analytics loads when pages open; use your browser settings to manage cookies.",
         ],
         [
           "Weather and storage",
@@ -123,7 +123,7 @@ const copy = {
         ],
         [
           "Language and other services",
-          "Language follows the URL. Google Maps, Open-Meteo and hosting services apply their own policies; clearing browser storage is not guaranteed to stop all of their data processing.",
+          "Language follows the URL. Google Maps, Google Fonts, Open-Meteo and hosting services apply their own policies; clearing browser storage is not guaranteed to stop all of their data processing.",
         ],
       ],
     },

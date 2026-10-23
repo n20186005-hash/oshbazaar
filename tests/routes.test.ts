@@ -30,6 +30,11 @@ test("all locale families contain matching crawlable metadata and one H1", async
         ctx
       );
       assert.equal(response.status, 200);
+      assert.ok(
+        response.headers
+          .get("Content-Security-Policy")
+          ?.includes("https://fonts.googleapis.com")
+      );
       const html = await response.text();
       assert.equal((html.match(/<h1\b/g) || []).length, 1);
       assert.ok(html.includes(`<html lang="${prefix ? "en" : "ky"}">`));
