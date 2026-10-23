@@ -1,12 +1,6 @@
-# Website asset manifest
+# Image inventory
 
-The following files are included in `client/public/assets/` and are the complete set of images referenced by the website home page.
+- `assets/source/osh-bazaar-market.jpg`: [Osh Bazaar Bishkek, Kyrgyzstan (1407198324)](https://commons.wikimedia.org/wiki/File:Osh_Bazaar_Bishkek,_Kyrgyzstan_(1407198324).jpg), Thomas Depenbusch (Depi), 16 September 2007 according to source Exif attribution. [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/). Original bytes retained. The build resizes/compresses a WebP and social JPEG; the page applies a display crop and colour treatment. Source/author/licence/date/modification credits are visible beside the photograph and in the footer. The historic scene is not evidence of current operation or location.
+- `assets/source/osh-bazaar-mark.png`, `osh-bazaar-textile.png`, `osh-bazaar-paper.png`: existing project brand and decorative source assets. The build makes smaller WebP derivatives; they are not presented as photographs of the destination.
 
-| File | Page usage | Delivery path |
-|---|---|---|
-| `osh-bazaar-market.jpg` | Hero image and the market-detail figure. | `/assets/osh-bazaar-market.jpg` |
-| `osh-bazaar-mark.png` | Header mark, footer mark, and site brand symbol. | `/assets/osh-bazaar-mark.png` |
-| `osh-bazaar-textile.png` | Transport section visual texture. | `/assets/osh-bazaar-textile.png` |
-| `osh-bazaar-paper.png` | Visit-planning section paper texture. | `/assets/osh-bazaar-paper.png` |
-
-The market photograph is identified in the page credit as Wikimedia Commons open-licence material. The three supporting branded assets are included as the original project files.
+Generated public derivatives are reproducible with `node scripts/prepare-images.mjs` and are included in the site build, rather than committing them separately.

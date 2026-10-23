@@ -1,45 +1,195 @@
-/**
- * Style reminder — 市集田野笔记：法律页面延续纸张、石榴红索引和不带营销压力的阅读节奏。
- */
-import { useEffect, useState } from "react";
-import { ArrowLeft, Languages, ShieldCheck } from "lucide-react";
-import { Link } from "wouter";
-
+import { ArrowLeft, ShieldCheck } from "lucide-react";
 type Locale = "ky" | "en";
-type LegalKind = "privacy" | "terms" | "cookies";
-
-const legalCopy = {
+type Kind = "privacy" | "terms" | "cookies";
+const copy = {
   ky: {
     back: "Башкы бетке кайтуу",
-    brandKicker: "ТАЛАА ЖАЗМАЛАРЫ",
-    updated: "Акыркы жаңыртуу: 2026-жылдын августу",
-    privacy: { title: "Купуялык саясаты", intro: "Бул көз карандысыз маалыматтык сайт эң аз зарыл болгон маалымат менен иштөөгө умтулат.", sections: [["Биз чогулткан маалымат", "Биз кызматты көрсөтүү үчүн керектүү эң аз көлөмдөгү маалыматты гана иштетүүгө аракет кылабыз. Ал браузер жана түзмөк тууралуу техникалык маалыматты, cookie жана сиз өзүңүз байланыш аркылуу берген маалыматты камтышы мүмкүн."], ["Маалыматты кантип колдонобуз", "Маалымат сайттын мазмунун жана колдонуу ыңгайлуулугун жакшыртуу, сурамдарга жооп берүү жана тиешелүү мыйзамдык милдеттерди аткаруу үчүн гана колдонулат."], ["Үчүнчү жактын кызматтары", "Барак карта көрсөтүү үчүн Google Maps сыяктуу кызматтарды колдоно алат. Мындай кызматтардын өз купуялык шарттары болот."], ["Сиздин укуктарыңыз", "Колдонулган мыйзамдарга жараша, жеке маалыматка жетүү, аны оңдоо же өчүрүүнү суроо жана даттануу укугуңуз болушу мүмкүн."]] },
-    terms: { title: "Колдонуу шарттары", intro: "Бул сайтка кирүү менен сиз төмөнкү маалыматтык колдонуу шарттарын түшүнөсүз.", sections: [["Мазмунду колдонуу", "Бардык материал маалыматтык максатта гана берилет. Бул көз карандысыз үчүнчү тараптын жол көрсөткүчү жана базардын, мамлекеттик органдардын же коммерциялык операторлордун расмий барагы эмес."], ["Маалыматтын тактыгы", "Биз мазмунду так берүүгө аракет кылабыз, бирок толуктугун же азыркы абалын кепилдей албайбыз. Каттам, иш убактысы жана шарттар өзгөрүшү мүмкүн; маанилүү маалыматты сапар алдында расмий каналдан текшериңиз."], ["Автордук укук", "Барактагы оригиналдуу текст жана дизайн корголот. Фотосүрөттөрдүн укугу тиешелүү авторлорго таандык; ар бир материалдын лицензиялык шартын урматтаңыз."], ["Жоопкерчиликтин чеги", "Бул материал “кандай болсо ошондой” берилет. Бул барактагы маалыматтын негизинде кабыл алынган саякат чечимдеринен келип чыккан чыгым үчүн сайт жооп бербейт."]] },
-    cookies: { title: "Cookie жөндөөлөрү", intro: "Cookie браузердеги жөндөөлөрдү эстеп, баракты ыңгайлуураак кылышы мүмкүн.", sections: [["Зарыл cookie", "Бул cookie сайттын негизги иштеши үчүн колдонулушу мүмкүн жана өчүрүлбөйт."], ["Аналитикалык cookie", "Эгер активдештирилсе, алар анонимдүү колдонуу үлгүлөрүн түшүнүүгө жардам берет. Бул демо баракта анализ cookie’си жүктөлбөйт."], ["Каалоо cookie", "Тил тандооңуз жергиликтүү браузер сактагычында сакталып, кийинки ачканда ошол тил көрсөтүлөт."], ["Тандоолорду башкаруу", "Браузериңиздин cookie жөндөөлөрүн каалаган убакта өзгөртө аласыз. Айрым cookie’лерди өчүрүү сайттын айрым ыңгайлуулуктарына таасир этиши мүмкүн."]] },
+    updated: "Жаңыртылды: 2026-жылдын 23-октябры",
+    privacy: {
+      title: "Купуялык саясаты",
+      intro: "Бул көз карандысыз гиддин чыныгы кызматтары жана маалымат агымы.",
+      sections: [
+        [
+          "Кызматтар",
+          "Барак Google Analytics өлчөө скриптин жана Google Maps картасын колдонот. Google Analytics барак ачылганда жүктөлөт; cookie’ни браузердин жөндөөлөрүнөн башкара аласыз.",
+        ],
+        [
+          "Аба ырайы жана сактагыч",
+          "Браузер адегенде ушул сайттын /api/weather дарегинен маалымат алат; ал жеткиликсиз болсо Open-Meteo кызматына түз кайрыла алат. Болжол кыска мөөнөткө сессия сактагычында сакталат. Тил барактын URL дарегинен тандалат.",
+        ],
+        [
+          "Хостинг",
+          "Хостинг суроо-талаптардын техникалык маалыматтарын иштете алат. Cloudflare өзүнчө иштөө көрсөткүчтөрүнүн/RUM скриптин кошушу мүмкүн; скрипттин болушу маалымат чындап жөнөтүлгөнүн ырастабайт.",
+        ],
+        [
+          "Жок кызматтар",
+          "Бул сайтта аккаунт, брондоо же байланыш формасы жок. Браузердин cookie жана сактагыч жөндөөлөрүн өзүңүз башкара аласыз.",
+        ],
+      ],
+    },
+    terms: {
+      title: "Колдонуу шарттары",
+      intro: "Бул базардын же мамлекеттик мекеменин расмий сайты эмес.",
+      sections: [
+        [
+          "Маалыматтын чеги",
+          "Маалымат жалпы багыт үчүн берилет. Бул гид бүгүнкү иштөөнү, көчүрүүнүн аякташын, так графикти же кызматтарды кепилдебейт. Сапар алдында керектүү жайды жана кирүүнү расмий канал же сатуучу аркылуу тактаңыз.",
+        ],
+        [
+          "Сүрөттөр",
+          "Thomas Depenbusch (Depi) тарткан 2007-жылдагы сүрөт CC BY 2.0 лицензиясында; булагы жана өзгөртүү маалыматы сүрөттүн жанында берилген. Тарыхый сүрөт азыркы абалдын далили эмес.",
+        ],
+        [
+          "Тышкы шилтемелер",
+          "Үчүнчү жактын кызматтары өз алдынча иштейт. Алардын мазмуну жана жеткиликтүүлүгү өзгөрүшү мүмкүн.",
+        ],
+      ],
+    },
+    cookies: {
+      title: "Cookie жана сактагыч маалыматы",
+      intro: "Гид колдонгон cookie жана браузер сактагычы жөнүндө маалымат.",
+      sections: [
+        [
+          "Google Analytics",
+          "Сайт Google Analytics өлчөө мүмкүнчүлүгүн жүктөйт. Cookie’ни бөгөттөө же өчүрүү үчүн браузердин жөндөөлөрүн колдонуңуз.",
+        ],
+        [
+          "Аба ырайы",
+          "Болжолдун кэши сессия сактагычында болушу мүмкүн. Ал карта белгисинин жалпы координаттарына тиешелүү; сайт түзмөктүн геолокациясын сурабайт.",
+        ],
+        [
+          "Тил жана башка кызматтар",
+          "Тил URL менен аныкталат. Google Maps, Open-Meteo жана хостинг кызматтарынын өз саясаттары бар; браузердин сактагычын тазалоо алардын бардык маалымат иштетүүсүн токтотот деп кепилденбейт.",
+        ],
+      ],
+    },
   },
   en: {
     back: "Back to the guide",
-    brandKicker: "FIELD NOTES",
-    updated: "Last updated: August 2026",
-    privacy: { title: "Privacy policy", intro: "This independent information site aims to work with the minimum data needed to provide the guide.", sections: [["Information we collect", "We aim to process only the minimum information needed to provide the service. This may include technical browser and device information, cookies, and information you voluntarily provide when contacting us."], ["How we use information", "Information is used only to improve the site’s content and usability, respond to requests, and meet applicable legal obligations."], ["Third-party services", "The page may use services such as Google Maps to display location information. These services have their own privacy terms."], ["Your rights", "Depending on applicable law, you may have rights to access, correct, request deletion of, or raise concerns about your personal information."]] },
-    terms: { title: "Terms of use", intro: "By accessing this site, you acknowledge the following information-use terms.", sections: [["Using the content", "All material is provided for information only. This is an independent third-party guide, not an official site of the bazaar, any public authority, or a commercial operator."], ["Accuracy of information", "We work to present useful information but cannot guarantee its completeness or current status. Routes, hours, and conditions can change; check official channels before any important journey."], ["Intellectual property", "Original copy and design on this site are protected. Image rights belong to their respective creators; respect the licence terms for each asset."], ["Limitation of liability", "Material is provided as is. This site is not responsible for loss arising from travel decisions made using information on this page."]] },
-    cookies: { title: "Cookie settings", intro: "Cookies can remember browser choices and make the guide easier to use.", sections: [["Necessary cookies", "These cookies may be used for the basic functioning of the site and cannot be switched off."], ["Analytics cookies", "If enabled, they help us understand anonymous usage patterns. No analytics cookie is loaded in this demonstration page."], ["Preference cookies", "Your language choice is saved in local browser storage so the same language can appear on your next visit."], ["Managing your choices", "You can change cookie settings in your browser at any time. Disabling some cookies may affect certain conveniences on the site."]] },
+    updated: "Updated 23 October 2026",
+    privacy: {
+      title: "Privacy policy",
+      intro: "The services and data flow used by this independent guide.",
+      sections: [
+        [
+          "Services",
+          "The page uses a Google Analytics measurement script and embedded Google Maps. Google Analytics loads when pages open; use your browser settings to manage cookies.",
+        ],
+        [
+          "Weather and storage",
+          "The browser first requests this site’s /api/weather endpoint; if unavailable, it can request Open-Meteo directly. Forecasts may be cached briefly in session storage. The page URL selects language.",
+        ],
+        [
+          "Hosting",
+          "Hosting can process technical request data. Cloudflare may add a separate performance/RUM beacon; script presence alone does not establish successful metric transmission.",
+        ],
+        [
+          "Absent features",
+          "This site has no accounts, booking service or contact form. You can manage cookies and browser storage through your browser settings.",
+        ],
+      ],
+    },
+    terms: {
+      title: "Terms of use",
+      intro:
+        "This is not an official website of the market or a public authority.",
+      sections: [
+        [
+          "Limits of information",
+          "Information provides general orientation. This guide does not guarantee operation today, completed relocation, a full schedule or facilities. Confirm the intended site and access with official channels or the trader before travel.",
+        ],
+        [
+          "Photographs",
+          "Thomas Depenbusch (Depi)’s 2007 photograph is licensed CC BY 2.0; source and modification notices appear beside the image. A historic photograph is not proof of current conditions.",
+        ],
+        [
+          "External links",
+          "Third-party services operate independently. Their content and availability can change.",
+        ],
+      ],
+    },
+    cookies: {
+      title: "Cookies and browser storage",
+      intro:
+        "Information about the cookies and browser storage used by the guide.",
+      sections: [
+        [
+          "Google Analytics",
+          "The site loads Google Analytics measurement capability. Use browser settings to block or remove cookies.",
+        ],
+        [
+          "Weather",
+          "Forecast data can be cached in session storage for the public map-listing coordinates. The site does not request device geolocation.",
+        ],
+        [
+          "Language and other services",
+          "Language follows the URL. Google Maps, Open-Meteo and hosting services apply their own policies; clearing browser storage is not guaranteed to stop all of their data processing.",
+        ],
+      ],
+    },
   },
 } as const;
-
-function LegalPage({ kind }: { kind: LegalKind }) {
-  const [locale, setLocale] = useState<Locale>(() => typeof window !== "undefined" && window.localStorage.getItem("osh-bazaar-locale") === "en" ? "en" : "ky");
-  const c = legalCopy[locale];
-  const page = c[kind];
-  useEffect(() => { document.documentElement.lang = locale; document.title = `${page.title} — Ош базары`; }, [locale, page.title]);
-  const select = (next: Locale) => { setLocale(next); window.localStorage.setItem("osh-bazaar-locale", next); };
-
-  return <main className="legal-shell">
-    <header className="legal-header"><Link href="/"><ArrowLeft size={17} />{c.back}</Link><div className="language-toggle"><Languages size={15} /><button className={locale === "ky" ? "is-active" : ""} onClick={() => select("ky")}>KY</button><button className={locale === "en" ? "is-active" : ""} onClick={() => select("en")}>EN</button></div></header>
-    <article className="legal-paper"><div className="legal-mark"><ShieldCheck size={22} /><span>ОШ БАЗАРЫ / {c.brandKicker}</span></div><p className="eyebrow"><span />{c.updated}</p><h1>{page.title}</h1><p className="legal-intro">{page.intro}</p><div className="legal-sections">{page.sections.map(([title, body], index) => <section key={title}><span>0{index + 1}</span><div><h2>{title}</h2><p>{body}</p></div></section>)}</div></article>
-  </main>;
+export default function LegalPage({
+  locale,
+  kind,
+}: {
+  locale: Locale;
+  kind: Kind;
+}) {
+  const c = copy[locale],
+    page = c[kind],
+    prefix = locale === "en" ? "/en" : "";
+  return (
+    <main className="legal-shell">
+      <header className="legal-header">
+        <a href={prefix + "/"}>
+          <ArrowLeft size={17} />
+          {c.back}
+        </a>
+        <div className="language-toggle">
+          <a href={"/" + kind} hrefLang="ky">
+            KY
+          </a>
+          <a href={"/en/" + kind} hrefLang="en">
+            EN
+          </a>
+        </div>
+      </header>
+      <article className="legal-paper">
+        <div className="legal-mark">
+          <ShieldCheck size={22} />
+          <span>OSH BAZAAR</span>
+        </div>
+        <p className="eyebrow">{c.updated}</p>
+        <h1>{page.title}</h1>
+        <p className="legal-intro">{page.intro}</p>
+        <div className="legal-sections">
+          {page.sections.map(([title, body], i) => (
+            <section key={title}>
+              <span>0{i + 1}</span>
+              <div>
+                <h2>{title}</h2>
+                <p>{body}</p>
+              </div>
+            </section>
+          ))}
+        </div>
+        {kind !== "terms" && (
+          <p>
+            <a href="https://developers.cloudflare.com/web-analytics/data-metrics/data-origin-and-collection/">
+              Cloudflare:{" "}
+              {locale === "ky"
+                ? "маалыматты чогултуу жөнүндө"
+                : "data collection documentation"}
+            </a>
+          </p>
+        )}
+        <p>
+          <a href={prefix + "/privacy"}>{copy[locale].privacy.title}</a> ·{" "}
+          <a href={prefix + "/terms"}>{copy[locale].terms.title}</a> ·{" "}
+          <a href={prefix + "/cookies"}>{copy[locale].cookies.title}</a>
+        </p>
+      </article>
+    </main>
+  );
 }
-
-export const PrivacyPage = () => <LegalPage kind="privacy" />;
-export const TermsPage = () => <LegalPage kind="terms" />;
-export const CookiesPage = () => <LegalPage kind="cookies" />;

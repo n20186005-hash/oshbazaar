@@ -1,37 +1,16 @@
-/**
- * Style reminder — 市集田野笔记：以克制的出版物气质组织公共导览信息；不使用商业化旅游模板。
- */
-import { Toaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import ErrorBoundary from "./components/ErrorBoundary";
-import { ThemeProvider } from "./contexts/ThemeContext";
-import { Route, Switch } from "wouter";
 import Home from "./pages/Home";
-import { CookiesPage, PrivacyPage, TermsPage } from "./pages/Legal";
+import LegalPage from "./pages/Legal";
 import NotFound from "./pages/NotFound";
-
-function Router() {
-  return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/privacy" component={PrivacyPage} />
-      <Route path="/terms" component={TermsPage} />
-      <Route path="/cookies" component={CookiesPage} />
-      <Route path="/404" component={NotFound} />
-      <Route component={NotFound} />
-    </Switch>
-  );
-}
-
-export default function App() {
-  return (
-    <ErrorBoundary>
-      <ThemeProvider defaultTheme="light">
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
-      </ThemeProvider>
-    </ErrorBoundary>
-  );
+export default function App({ path = "/" }: { path?: string }) {
+  const locale = path.startsWith("/en/") || path === "/en" ? "en" : "ky";
+  const route = locale === "en" ? path.slice(3) || "/" : path;
+  if (route === "/") return <Home locale={locale} />;
+  if (["/privacy", "/terms", "/cookies"].includes(route))
+    return (
+      <LegalPage
+        locale={locale}
+        kind={route.slice(1) as "privacy" | "terms" | "cookies"}
+      />
+    );
+  return <NotFound locale={locale} />;
 }

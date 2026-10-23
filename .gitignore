@@ -29,3 +29,7 @@ Thumbs.db
 
 # Attached assets (binary working files, not source)
 attached_assets/
+
+client/.wrangler/
+client/public/assets/*.webp
+client/public/assets/social.jpg

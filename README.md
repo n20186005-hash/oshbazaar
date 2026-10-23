@@ -1,31 +1,9 @@
-# Osh Bazaar Field Notes — complete source package
+# Osh Bazaar — independent visitor guide
 
-This folder contains the complete source code for the bilingual Osh Bazaar public-interest guide, together with every image used by the published page. The delivery copy uses local image paths so it can be retained or moved without relying on hosted project storage.
+React/Vite guide with Kyrgyz at `/` and English at `/en/`, including the existing privacy, terms and cookie-information pages in both languages. The build prerenders the same React components used for hydration. Cloudflare Workers serves the HTML and the native `/api/weather?lat=…&lon=…` endpoint. The client retains its Open-Meteo fallback.
 
-## Run locally
+Use the package-pinned pnpm to install, then run `pnpm check`, `pnpm test` and `pnpm build`. The Worker configuration builds the full site with `npm run build`; a bare Vite build does not generate the route snapshots. Preview only after the build is frozen so the runtime asset manifest matches the HTML.
 
-Use Node.js 22 or newer and pnpm 10 or newer. From this folder, run:
+The supplied Bishkek map listing does not establish current operating status or completed relocation. The guide links dated municipal/state-agency information and explains what visitors must verify before travel. Google Analytics capability is preserved; cookie copy describes its actual loading rather than promising an absent consent control.
 
-```bash
-pnpm install
-pnpm dev
-```
-
-To produce a production build, run:
-
-```bash
-pnpm build
-```
-
-## Included contents
-
-| Path | Purpose |
-|---|---|
-| `client/` | React pages, components, styles, favicon, and bundled website assets. |
-| `client/public/assets/` | All four images actually referenced by the home page. |
-| `server/` and `shared/` | Template compatibility code required by the project build. |
-| `package.json` and `pnpm-lock.yaml` | Dependency definitions and reproducible package lock. |
-| `ideas.md` | Approved visual direction and brand decisions. |
-| `ASSET_MANIFEST.md` | Image-by-image inventory and usage mapping. |
-
-> The package intentionally excludes `node_modules/`, build output, logs, and version-control metadata. These are regenerated locally and are not part of the website source or original visual asset set.
+Original artwork and photograph source files are retained in `assets/source/`. `scripts/prepare-images.mjs` creates smaller public derivatives. See `ASSET_MANIFEST.md` for the exact photo source, licence and modification notice.
