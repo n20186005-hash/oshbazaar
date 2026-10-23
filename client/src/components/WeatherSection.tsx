@@ -140,7 +140,7 @@ function buildAdvice(d: {
   if (d.rainProb >= 60) {
     add(
       "outfit",
-      "Жаан болушу ыктымал — жаанга каршы чапан же умтуу алыңыз.",
+      "Жаан болушу ыктымал — жаанга каршы чапан же кол чатыр алыңыз.",
       "Rain is likely — bring a raincoat or umbrella."
     );
     add(
@@ -148,12 +148,12 @@ function buildAdvice(d: {
       "Ички бөлмөлөргө артыкчылык бериңиз, ачык асман астындагы айланаларды кийинчерээк жасоо жакшы.",
       "Prefer indoor areas; postpone open-air plans."
     );
-    add("items", "Жаан чапан же умтуу.", "Raincoat or umbrella.");
+    add("items", "Жаан чапан же кол чатыр.", "Raincoat or umbrella.");
   }
   if (isDrizzle) {
     add(
       "outfit",
-      "Жол бети сызгыр — басып жүргөндө аякбашыңызга көңүл бургула.",
+      "Жол тайгак болушу мүмкүн — басып жүргөндө этият болуңуз.",
       "Pavements are slippery — mind your step."
     );
     add(
@@ -161,22 +161,22 @@ function buildAdvice(d: {
       "Ачык асман астындагы базар катарлары начарраак сезилет.",
       "Open-air market rows feel less pleasant."
     );
-    add("items", "Бүктөлмө умтуу.", "A folding umbrella.");
+    add("items", "Бүктөлмө кол чатыр.", "A folding umbrella.");
   }
   if (isRain) {
     add(
       "risk",
-      "Жаан күчтүү — өрөөндөрдөн, жапыз жерлерден алыс болуңуз.",
-      "Heavy rain — avoid valleys and low-lying spots."
+      "Жаан — жол тайгак болушу мүмкүн; жергиликтүү эскертүүлөрдү текшериңиз.",
+      "Rain — surfaces may be slippery; check local warnings."
     );
     add(
       "activities",
-      "Ачык асман астындагы айланаларды сунуш кылбайбыз; кеме же лифт иштебей калышы мүмкүн.",
-      "Open-air plans aren't ideal; boats or lifts may stop."
+      "Ачык жердеги планды ийкемдүү түзүңүз; имараттын ачылышын өзүнчө тактаңыз.",
+      "Keep outdoor plans flexible; confirm any indoor alternative is open."
     );
     add(
       "items",
-      "Жаан чапан; узун саптуу умтуу сунуш кылынбайт (шамал).",
+      "Жаан чапан; узун саптуу кол чатыр сунуш кылынбайт (шамал).",
       "Raincoat; skip long-handle umbrellas (wind)."
     );
   }
@@ -188,8 +188,8 @@ function buildAdvice(d: {
     );
     add(
       "activities",
-      "Суу проекттери көбүнчө жабык болот.",
-      "Water activities are likely closed."
+      "Расмий эскертүүлөрдү карап, ачык жердеги сейилди кийинкиге калтырыңыз.",
+      "Check official warnings and postpone exposed sightseeing."
     );
   }
 
@@ -251,8 +251,8 @@ function buildAdvice(d: {
     );
     add(
       "items",
-      "Шляпа учуп кетиши ыктымал, кенен көйнөктөн качыңыз.",
-      "Hats may blow away; skip loose dresses."
+      "Баш кийимди жана бош буюмдарды бекем кармаңыз.",
+      "Secure hats and loose belongings."
     );
   }
   if (windLevel >= 7) {
@@ -314,7 +314,7 @@ function buildAdvice(d: {
   if (isSnow) {
     add(
       "outfit",
-      "Кар жаап жатат — ысып кийиниңиз, буткап жолдо ойнооңуз.",
+      "Кар жаап жатат — жылуу кийинип, тайгак жолдо этият болуңуз.",
       "Snow falling — dress warm and watch slippery paths."
     );
   }
@@ -396,11 +396,11 @@ const labels = {
     wind: "Шамал",
     uv: "УФ индекси",
     forecast: "Болжолдуу аба ырайы",
-    bringUmbrella: "Жаан болушу ыктымал — умтуу алыңыз.",
+    bringUmbrella: "Жаан болушу ыктымал — кол чатыр алыңыз.",
     noUmbrella: "Жаан ыктымалдыгы аз; шарт өзгөрүшү мүмкүн.",
     updated: "Жаңыртылды",
     unavailable: "Аба ырайынын маалыматы убактылуу жеткиликсиз.",
-    retry: "Кайра аракет",
+    retry: "Кайра аракет кылуу",
     rainChance: "Жаан ыктымалдыгы",
     adviceOutfit: "Кийим",
     adviceActivity: "Эс алуу",
