@@ -73,7 +73,7 @@ const copy = {
       sections: [
         [
           "Services",
-          "The page uses a Google Analytics measurement script embedded Google Maps and Google Fonts. Google Analytics loads when pages open; use your browser settings to manage cookies.",
+          "The page uses a Google Analytics measurement script, embedded Google Maps and Google Fonts. Google Analytics loads when pages open; use your browser settings to manage cookies.",
         ],
         [
           "Weather and storage",
