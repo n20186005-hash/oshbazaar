@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { validForecast } from "@/lib/weather-contract";
+import { forecastWeekday, destinationUpdateTime } from "@/lib/weather-date";
 import {
   Cloud,
   CloudDrizzle,
@@ -335,7 +336,7 @@ const BUILD_URL = (lat: number, lon: number) =>
   `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +
   `&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m` +
   `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,uv_index_max` +
-  `&forecast_days=7&timezone=auto`;
+  `&forecast_days=7&timezone=Asia%2FBishkek`;
 
 export async function loadWeather(
   lat: number,
@@ -488,13 +489,6 @@ export default function WeatherSection({
         })
       : null;
 
-  const dayFormatter = new Intl.DateTimeFormat(
-    locale === "ky" ? "ky-KG" : "en-US",
-    {
-      weekday: "short",
-    }
-  );
-
   const blocks: Block[] = [
     { key: "outfit", title: t.adviceOutfit },
     { key: "activities", title: t.adviceActivity },
@@ -596,10 +590,7 @@ export default function WeatherSection({
             {updatedAt && (
               <p className="weather-updated">
                 {t.updated}{" "}
-                {new Date(updatedAt).toLocaleTimeString(
-                  locale === "ky" ? "ky-KG" : "en-US",
-                  { hour: "2-digit", minute: "2-digit" }
-                )}
+                {destinationUpdateTime(updatedAt)}
               </p>
             )}
           </article>
@@ -619,7 +610,7 @@ export default function WeatherSection({
                     <span className="weather-day">
                       {isToday
                         ? t.now
-                        : dayFormatter.format(new Date(`${iso}T00:00`))}
+                        : forecastWeekday(iso, locale)}
                     </span>
                     <Icon
                       size={26}
