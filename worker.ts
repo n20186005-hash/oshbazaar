@@ -1,10 +1,14 @@
 import { weatherResponse } from "./weather-api";
+import { topicSlugs } from "./client/src/topics";
 interface Env {
   ASSETS: { fetch(request: Request): Promise<Response> };
 }
 interface Context {
   waitUntil(promise: Promise<unknown>): void;
 }
+const topicRoutes = new Set<string>();
+for (const prefix of ["", "/en"])
+  for (const slug of topicSlugs) topicRoutes.add(`${prefix}/${slug}`);
 const valid = new Set([
   "/",
   "/privacy",
@@ -14,6 +18,7 @@ const valid = new Set([
   "/en/privacy",
   "/en/terms",
   "/en/cookies",
+  ...topicRoutes,
 ]);
 export default {
   async fetch(request: Request, env: Env, ctx: Context): Promise<Response> {

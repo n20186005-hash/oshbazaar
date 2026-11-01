@@ -19,12 +19,12 @@ const copy = {
     plan: "Сапардан мурда окуңуз",
     statusTitle: "Ош базары бүгүн иштейби?",
     statusBody:
-      "Бул гид бүгүн бардык катарлардын иштегенин же көчүрүү аяктаганын так ырастабайт. 2026-жылдын 4-сентябрындагы Кабар кабарында жаңы базардын курулушу жана сатуучуларды көчүрүүгө даярдык айтылган. Мэриянын билдирүүсү «Ош базары» аймагындагы текшерүүнү баяндайт. Сапар алдында керектүү сатуучу же шаардык расмий канал аркылуу соода ордун жана кирүүнү тактаңыз.",
+      "Бул гид бүгүн бардык катарлардын иштегенин же көчүрүү аяктаганын так ырастабайт. 2026-жылдын 4-сентябрындагы Кабар кабарында жаңы базардын курулушу жана сатуучуларды көчүрүүгө даярдык айтылган. 30-октябрь 2026 текшерүү боюнча жаңы базардын негизги курулушу аяктаган деп баяндалат, ачылышы 2027-жылдын жазына пландалган. Мэриянын билдирүүсү «Ош базары» аймагындагы текшерүүнү баяндайт. Сапар алдында керектүү сатуучу же шаардык расмий канал аркылуу соода ордун жана кирүүнү тактаңыз.",
     municipal: "Мэриянын билдирүүсү",
     transfer: "Кабар: көчүрүү жөнүндө 4-сентябрдагы кабар",
-    date: "Текшерилген күн: 2026-жылдын 23-октябры",
+    date: "Текшерилген күн: 2026-жылдын 30-октябры",
     cue: "Google Maps текшерүүдө 09:00 ачылуу белгисин көрсөткөн. Бул толук апталык график же бүгүнкү иштөөнүн кепилдиги эмес.",
-    rating: "Google Maps: 3.6/5 · 39 279 пикир · 23-октябрь 2026",
+    rating: "Google Maps: 3.6/5 · 39 279 пикир · 30-октябрь 2026",
     photoAlt:
       "2007-жылы сүрөткө тартылган базардагы кургатылган азыктар жана соода текчелери",
     photoNote:
@@ -95,11 +95,11 @@ const copy = {
       ],
       [
         "Иштөө убактысы 09:00–17:00бү?",
-        "Толук апталык график ырасталган эмес. 23-октябрь 2026 текшерүүдө Maps 09:00 ачылуу белгисин көрсөткөн; жабылуу убактысын мындан чыгарууга болбойт.",
+        "Толук апталык график ырасталган эмес. 30-октябрь 2026 текшерүүдө Maps 09:00 ачылуу белгисин көрсөткөн; жабылуу убактысын мындан чыгарууга болбойт.",
       ],
       [
         "Жаңы базарга көчүү аяктадыбы?",
-        "4-сентябрдагы Кабар кабары көчүрүүгө даярдык жөнүндө. Бул гид көчүүнүн аяктаганын же жаңы комплекстин бүгүнкү ачылышын ырастабайт.",
+        "4-сентябрдагы Кабар кабары көчүрүүгө даярдык жөнүндө. 30-октябрь 2026 текшерүү боюнча жаңы базардын негизги курулушу аяктаган деп баяндалат, ачылышы 2027-жылдын жазына пландалган. Бул гид көчүүнүн аяктаганын же жаңы комплекстин бүгүнкү ачылышын ырастабайт.",
       ],
       [
         "Даараткана же тоскоолдуксуз кирүү барбы?",
@@ -111,6 +111,19 @@ const copy = {
       "Google Maps баасы үчүнчү жактын белгилүү күндөгү маалыматы. Бул сайт пикирлерди чогулткан эмес жана расмий базар оператору эмес. Булактардын датасын жана кайсы жай жөнүндө экенин салыштырыңыз.",
     footer:
       "Көз карандысыз маалыматтык гид; мамлекеттик органдарга же базардын операторуна тиешеси жок.",
+    guidesTitle: "Гиддер жана темалар",
+    guides: [
+      ["Ош базары бүгүн иштейби?", "/status"],
+      ["Көчүрүү графиги", "/relocation-timeline"],
+      ["Эски жана жаңы базар", "/old-vs-new-osh-bazaar"],
+      ["Жаңы Ош базары 2027", "/new-osh-bazaar-2027"],
+      ["Кантип баруу", "/getting-to-osh-bazaar"],
+      ["43-автобус", "/bus-43"],
+      ["Биринчи ирет соода", "/first-time-shopping-guide"],
+      ["Эмне жеген", "/what-to-eat-at-osh-bazaar"],
+      ["Жакында эмне кылуу", "/things-to-do-near-osh-bazaar"],
+      ["Жабык болсо эмне кылам", "/if-osh-bazaar-is-closed"],
+    ],
     legal: ["Купуялык", "Шарттар", "Cookie маалыматы"],
     menu: "Меню",
     skip: "Негизги мазмунга өтүү",
@@ -125,12 +138,12 @@ const copy = {
     plan: "Read before travelling",
     statusTitle: "Is Osh Bazaar open today?",
     statusBody:
-      "This guide cannot confirm that every trading area is operating today or that relocation is complete. Kabar’s 4 September 2026 report described construction of a new market and preparations to transfer traders. A municipal notice describes an inspection at Osh Bazary. Before travel, confirm your intended trader’s current location and access with the trader or official city channels.",
+      "This guide cannot confirm that every trading area is operating today or that relocation is complete. Kabar’s 4 September 2026 report described construction of a new market and preparations to transfer traders. As of the 30 October 2026 check, the new market’s main construction is reported complete and opening is planned for spring 2027. A municipal notice describes an inspection at Osh Bazary. Before travel, confirm your intended trader’s current location and access with the trader or official city channels.",
     municipal: "Municipal notice",
     transfer: "Kabar: 4 September transfer report",
-    date: "Checked 23 October 2026",
+    date: "Checked 30 October 2026",
     cue: "Google Maps showed an opens-at-09:00 cue when checked. This is not a complete weekly schedule or a guarantee of trading today.",
-    rating: "Google Maps: 3.6/5 · 39,279 reviews · 23 October 2026",
+    rating: "Google Maps: 3.6/5 · 39,279 reviews · 30 October 2026",
     photoAlt: "Market stalls and dried goods photographed in 2007",
     photoNote:
       "Historic 2007 photograph; it does not establish current trading location or operation.",
@@ -200,11 +213,11 @@ const copy = {
       ],
       [
         "Are the hours 09:00–17:00?",
-        "A full weekly schedule has not been verified. Maps showed an opens-at-09:00 cue when checked on 23 October 2026; a closing time cannot be inferred from that cue.",
+        "A full weekly schedule has not been verified. Maps showed an opens-at-09:00 cue when checked on 30 October 2026; a closing time cannot be inferred from that cue.",
       ],
       [
         "Has the new market transfer finished?",
-        "Kabar’s 4 September report described preparations for a transfer. This guide does not establish completed relocation or today’s opening of the new complex.",
+        "Kabar’s 4 September report described preparations for a transfer. As of the 30 October 2026 check, the new market’s main construction is reported complete and opening is planned for spring 2027. This guide does not establish completed relocation or today’s opening of the new complex.",
       ],
       [
         "Are toilets or step-free routes available?",
@@ -216,6 +229,19 @@ const copy = {
       "The Google Maps rating is a dated third-party snapshot. This site did not collect the reviews and is not the market operator. Compare each source’s date and the location it describes.",
     footer:
       "Independent information guide; not affiliated with a public authority or market operator.",
+    guidesTitle: "Guides and topics",
+    guides: [
+      ["Is Osh Bazaar open today?", "/status"],
+      ["Relocation timeline", "/relocation-timeline"],
+      ["Old and new market", "/old-vs-new-osh-bazaar"],
+      ["New Osh Bazaar 2027", "/new-osh-bazaar-2027"],
+      ["How to get there", "/getting-to-osh-bazaar"],
+      ["Bus 43", "/bus-43"],
+      ["First-time shopping", "/first-time-shopping-guide"],
+      ["What to eat", "/what-to-eat-at-osh-bazaar"],
+      ["Things to do nearby", "/things-to-do-near-osh-bazaar"],
+      ["If Osh Bazaar is closed", "/if-osh-bazaar-is-closed"],
+    ],
     legal: ["Privacy", "Terms", "Cookie information"],
     menu: "Menu",
     skip: "Skip to main content",
@@ -452,6 +478,16 @@ export default function Home({ locale }: { locale: Locale }) {
               <a href={MAP}>Google Maps</a>
             </p>
           </div>
+        </section>
+        <section id="guides" className="home-guides">
+          <h2>{t.guidesTitle}</h2>
+          <ul>
+            {t.guides.map(([label, href]) => (
+              <li key={href}>
+                <a href={prefix + href}>{label}</a>
+              </li>
+            ))}
+          </ul>
         </section>
       </main>
       <footer className="site-footer">

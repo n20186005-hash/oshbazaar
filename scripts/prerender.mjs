@@ -1,5 +1,5 @@
 import { readFile, writeFile, mkdir } from "node:fs/promises";
-import { render } from "../dist/render/entry-server.js";
+import { render, TOPICS, topicSlugs } from "../dist/render/entry-server.js";
 const origin = "https://oshbazaar.org",
   template = await readFile("dist/public/index.html", "utf8");
 const meta = {
@@ -78,6 +78,31 @@ for (const locale of ["ky", "en"])
     await mkdir(file.slice(0, file.lastIndexOf("/")), { recursive: true });
     await writeFile(file, html);
     if (page !== "error") routes.push(route);
+  }
+const topicBySlug = Object.fromEntries(TOPICS.map(t => [t.slug, t]));
+const ogAlt = "Independent Osh Bazaar visitor guide";
+for (const locale of ["ky", "en"])
+  for (const slug of topicSlugs) {
+    const topic = topicBySlug[slug];
+    if (!topic) continue;
+    const prefix = locale === "en" ? "/en" : "";
+    const route = `${prefix}/${slug}`;
+    const c = topic[locale];
+    const title = c.metaTitle;
+    const description = c.metaDescription;
+    let tags = `<meta name="description" content="${esc(description)}"><meta property="og:type" content="website"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${origin + route}"><meta property="og:image" content="${origin}/assets/social.jpg"><meta property="og:image:alt" content="${esc(ogAlt)}"><meta name="twitter:card" content="summary_large_image">`;
+    tags += `<link rel="canonical" href="${origin + route}"><link rel="alternate" hreflang="ky" href="${origin}/${slug}"><link rel="alternate" hreflang="en" href="${origin}/en/${slug}"><link rel="alternate" hreflang="x-default" href="${origin}/${slug}">`;
+    const html = template
+      .replace('<html lang="ky">', `<html lang="${locale}">`)
+      .replace(/<title>.*?<\/title>/, `<title>${esc(title)}</title>${tags}`)
+      .replace(
+        '<div id="root"></div>',
+        `<div id="root">${render(route)}</div>`
+      );
+    const file = `dist/public${route}/index.html`;
+    await mkdir(file.slice(0, file.lastIndexOf("/")), { recursive: true });
+    await writeFile(file, html);
+    routes.push(route);
   }
 await writeFile(
   "dist/public/sitemap.xml",
